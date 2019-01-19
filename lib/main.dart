@@ -46,11 +46,21 @@ class RandomWordsState extends State<RandomWords> {
   Widget _buildRow(WordPair pair) {
     final bool _alreadySaved = _saved.contains(pair);
     return ListTile(
-        title: Text(pair.asPascalCase, style: _biggerFont),
-        trailing: new Icon(
-          _alreadySaved ? Icons.favorite : Icons.favorite_border,
-          color: _alreadySaved ? Colors.red : null,
-        ));
+      title: Text(pair.asPascalCase, style: _biggerFont),
+      trailing: new Icon(
+        _alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: _alreadySaved ? Colors.red : null,
+      ),
+      onTap: () {
+        setState(() {
+          if (_alreadySaved) {
+            _saved.remove(pair);
+          } else {
+            _saved.add(pair);
+          }
+        });
+      },
+    );
   }
 }
 
